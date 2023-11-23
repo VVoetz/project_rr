@@ -1,0 +1,34 @@
+## Wat vragen (en antwoorden)
+1. Het probleem dat mijn app gaat oplossen is dat mensen niet weten waar ze willen eten. Ookal zijn er duizenden reviews te lezen op Tripadvisor en Maps, is het voor velen toch moeilijk om te kiezen waar ze zin in hebben.
+2. Het is bedoeld voor voornamelijk volwassenen, of ze nou veel of weinig uit eten gaan. (Maar ze moeten wel ooit uit eten gaan om er wat aan te hebben)
+3. De webapp zal waarschijnlijk voornamelijk gebruikt worden op smartphone, alhoewel het ook op een laptop/pc bruikbaar is.
+4. Het probleem van andere review-apps is dat ze het vooral makkelijker maken om slechte keuzes te vermijden, terwijl je hier keuzes kan gaan maken op basis van jouw eerdere ervaringen, of die van je vrienden/familie. Dat zijn tevens ook mensen die je meer vertrouwt voor advies.
+
+## Features
+### Noodzakelijk:
+1. Mensen moeten een account kunnen maken en kunnen inloggen.
+2. Als basis moet er een kaart te zien zijn waar men een pin voor restaurants kan toevoegen die opgeslagen worden.
+3. De gepinde restaurants moet men op kunnen klikken, om zo meer informatie erover te kunnen vergaren (informatie die de gebruiker heeft gegeven)
+
+### Optioneel:
+1. Vrienden toevoegen, om het mogelijk te maken om de favoriete restaurants van je vrienden te bekijken voor inspiratie.
+2. Een lijst pagina waarin men zonder de kaart al kan filteren tussen restaurants die de gebruiker+vrienden hebben toegevoegd, hier kan gefilterd worden op bijvoorbeeld prijs of keuken (Spaans, Chinees etc.)
+3. Een feature waardoor men zowel de lijst als kaart naast elkaar zien, waarmee ook direct zichtbaar is waar de restaurants zitten die overblijven na de filters.
+4. Het mogelijk maken om vrienden een bericht te sturen als je bij een restaurant hebt gegeten dat zij hebben aangeraden.
+5. Extra filters voor ontbijt/lunch/diner of bijvoorbeeld koffie tentjes.
+6. De mogelijkheid om 'collecties' van speciale gebruikers te bekijken. (Bijvoorbeeld het bekijken van de favoriete spots van een tourguide in een stad die je wil gaan bezoeken)
+7. De mogelijkheid om op basis van je huidige locatie een shortlist/aanbeviling aan restaurants te maken
+
+## Resoruces
+Ik ga hoogstwaarschijnlijk gebruik maken van de kaart van leafletjs.com, te downloaden van https://leafletjs.com/download.html. 
+
+Voorbeelden:
+Foto 1 is de homepagina voor wanneer de gebruiker ingelogd is
+Foto 2 is de inlog pagina
+Foto 3 toont hoe een restaurant wordt toegevoegd
+Foto 4 is de 'vrienden' pagina
+
+![Voorbeeld1](template.png)
+![Voorbeeld2](template3.jpg)
+![Voorbeeld3](template2.jpg)
+![Voorbeeld4](template4.jpg)
