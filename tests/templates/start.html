@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Start
+{% endblock %}
+
+{% block main %}
+<form action="/add" method="post">
+    <input type="hidden" name="lat" id="latInput" value="">
+    <input type="hidden" name="lng" id="lngInput" value="">
+    <button class="btn btn-primary" type="submit" id="sendDataButton">add</button>
+</form>
+{% endblock %}
+{% block body2 %}
+    {% for marker in markers %}
+    var marker = L.marker([{{marker.horizontal}}, {{marker.vertical}}]).addTo(map).bindPopup('{{marker.name}}');
+    {% endfor %}
+{% endblock %}

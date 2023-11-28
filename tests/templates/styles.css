@@ -1,0 +1,8 @@
+#map { 
+height: 90vh; 
+width: 10%;
+}
+
+.navbar.bg-light {
+    background-color: red;
+}
