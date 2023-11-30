@@ -8,11 +8,31 @@
 <form action="/add" method="post">
     <input type="hidden" name="lat" id="latInput" value="">
     <input type="hidden" name="lng" id="lngInput" value="">
-    <button class="btn btn-primary" type="submit" id="sendDataButton">add</button>
+    <input class="form-control w-auto" class="input" type="text" id="name" name="name" placeholder="name"> <br>    
+    <button class="input" class="btn btn-primary" type="submit" id="sendDataButton">add</button>
 </form>
+
+
+
 {% endblock %}
-{% block body2 %}
+{% block marker_script %}
     {% for marker in markers %}
     var marker = L.marker([{{marker.horizontal}}, {{marker.vertical}}]).addTo(map).bindPopup('{{marker.name}}');
     {% endfor %}
+{% endblock %}
+
+{% block marker_add %}
+var popup = L.popup();
+
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("Selected location")
+        .openOn(map);
+
+    document.getElementById("latInput").value = e.latlng.lat;
+    document.getElementById("lngInput").value = e.latlng.lng;
+}
+
+map.on('click', onMapClick);
 {% endblock %}

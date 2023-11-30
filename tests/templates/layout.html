@@ -25,11 +25,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbar">
-                    <ul class="navbar-nav me-auto mt-2">
-                    </ul>
+                    {% if session["user_id"] %}
                     <ul class="navbar-nav ms-auto mt-2">
                         <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
                     </ul>
+                    {% else %}
+                        <ul class="navbar-nav ms-auto mt-2">
+                            <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
         </nav>
@@ -41,12 +46,15 @@
             </header>
         {% endif %}
 
+        {% if rendermap %}
         <body>
-            <div id="map"></div>
+            <div class="kaart">
+                <div id="map"></div>
+            </div>
         </body>
-
+        {% endif %}
         
-        <main>
+        <main class="cent">
             {% block main %}{% endblock %}
         </main>
     </body>
@@ -61,21 +69,12 @@
     }).addTo(map);
     
     osm.addTo(map)
-    {% block body2 %}
+    
+    {% block marker_script %}
     {% endblock %}
     
-    var popup = L.popup();
-
-    function onMapClick(e) {
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(map);
-
-        document.getElementById("latInput").value = e.latlng.lat;
-        document.getElementById("lngInput").value = e.latlng.lng;
-    }
+    {% block marker_add %}
+    {% endblock %}
     
-    map.on('click', onMapClick);
 </script>
 

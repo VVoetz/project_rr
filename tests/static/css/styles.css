@@ -1,19 +1,40 @@
 #map { 
     height: 90vh; 
-    width: 80%;
+    width: 75%;
     position: fixed;
     right: 0;
-}
-    
-.navbar.bg-light {
     
 }
-
-.container-fluid {
-    
-}
+.inlog {
+    top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+} 
 
 .red
 {
     margin-left: 50%;
+}
+
+.input
+{
+    margin-left: 12.5%;
+    margin-right: 87.5%;
+    
+}
+
+.kaart
+{
+    border: 5px red;        
+}
+
+.center-container {
+    position: absolute;
+    top: 10;
+    left: 0;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
