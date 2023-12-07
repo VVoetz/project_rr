@@ -13,14 +13,25 @@
 
 .red
 {
-    margin-left: 50%;
+    margin-left: 75px;
 }
 
 .input
 {
-    margin-left: 12.5%;
-    margin-right: 87.5%;
+    width: 23%;
+    margin-left: 1%;
     
+}
+
+.form-control {
+    width: 23%;
+    margin-left: 1%;
+}
+
+textarea {
+    resize: none;
+    width: 23%;
+    margin-left: 1%;
 }
 
 .kaart
@@ -37,4 +48,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+h4 {
+    margin: 0;
+}
+
+.navbar-brand {
+    width: 25%;
 }

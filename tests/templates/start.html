@@ -8,7 +8,9 @@
 <form action="/add" method="post">
     <input type="hidden" name="lat" id="latInput" value="">
     <input type="hidden" name="lng" id="lngInput" value="">
-    <input class="form-control w-auto" class="input" type="text" id="name" name="name" placeholder="name"> <br>    
+    <br>
+    <input class="form-control" class="input" type="text" id="name" name="name" placeholder="name"> <br>
+    <textarea id="description" name="description" rows="4" cols="50" placeholder="description"></textarea> <br> 
     <button class="input" class="btn btn-primary" type="submit" id="sendDataButton">add</button>
 </form>
 
@@ -17,7 +19,7 @@
 {% endblock %}
 {% block marker_script %}
     {% for marker in markers %}
-    var marker = L.marker([{{marker.horizontal}}, {{marker.vertical}}]).addTo(map).bindPopup('{{marker.name}}');
+    var marker = L.marker([{{marker.horizontal}}, {{marker.vertical}}]).addTo(map).bindPopup('<iframe src=\"/restaurant/{{marker.id}}\"></iframe>');
     {% endfor %}
 {% endblock %}
 
