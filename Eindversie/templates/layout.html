@@ -91,31 +91,31 @@
 
     const You = L.layerGroup();
 
-{% for marker in markers %}
-var marker = L.marker([{{marker.horizontal}}, {{marker.vertical}}]).addTo(map).addTo(You).bindPopup('<iframe src="/restaurant/{{marker.id}}"></iframe>');
-{% endfor %}
+    {% for marker in markers %}
+    var marker = L.marker([{{marker.horizontal}}, {{marker.vertical}}]).addTo(map).addTo(You).bindPopup('<iframe src="/restaurant/{{marker.id}}"></iframe>');
+    {% endfor %}
 
 
-{% for friend in friends %}
-const {{friend.friend}} = L.layerGroup();
-{% endfor %}
+    {% for friend in friends %}
+    const {{friend.friend}} = L.layerGroup();
+    {% endfor %}
 
-{% for marker in fmarkers %}
-var marker = L.marker([{{marker.horizontal}}, {{marker.vertical}}], {
-    icon: redIcon
-}).addTo(map).addTo({{marker.placedby}}).bindPopup('<iframe src="/restaurant/{{marker.id}}"></iframe>');
-{% endfor %}
+    {% for marker in fmarkers %}
+    var marker = L.marker([{{marker.horizontal}}, {{marker.vertical}}], {
+        icon: redIcon
+    }).addTo(map).addTo({{marker.placedby}}).bindPopup('<iframe src="/restaurant/{{marker.id}}"></iframe>');
+    {% endfor %}
 
-const overlays = {};
-const layerControl = L.control.layers(overlays).addTo(map);
+    const overlays = {};
+    const layerControl = L.control.layers(overlays).addTo(map);
 
-layerControl.addOverlay(You, 'You');
-{% for friend in friends %}
-layerControl.addOverlay({{friend.friend}}, '{{friend.friend}}');
-{% endfor %}
+    layerControl.addOverlay(You, 'You');
+    {% for friend in friends %}
+    layerControl.addOverlay({{friend.friend}}, '{{friend.friend}}');
+    {% endfor %}
     {% endif %}
     
-    {% block marker_add %}
+    {% block location %}
     {% endblock %}
     
     
@@ -127,7 +127,7 @@ layerControl.addOverlay({{friend.friend}}, '{{friend.friend}}');
         }
     }
     
-    checkCheckboxesByClass('leaflet-control-layers-selectorx');
+    checkCheckboxesByClass('leaflet-control-layers-selector');
     
     L.geolet({
         position: 'topleft'
