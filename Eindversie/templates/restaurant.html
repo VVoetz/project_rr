@@ -10,8 +10,11 @@
         {% if you %}
         Placed by: You
         {% endif %}
+        
         {% if other %}
+        <a style="position: fixed; margin-top: 5px">
         Placed by: {{restaurant.placedby}}
+        </a>
         {% endif %}
     </body>
     
