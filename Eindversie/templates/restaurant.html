@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <h4 style="text-align: center;">
+            {{restaurant.name}}
+        </h4>
+    </head>
+    <body>
+        {{restaurant.description}} <br>
+        {% if you %}
+        Placed by: You
+        {% endif %}
+        {% if other %}
+        Placed by: {{restaurant.placedby}}
+        {% endif %}
+    </body>
+    
+<html>

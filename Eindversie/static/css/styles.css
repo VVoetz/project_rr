@@ -1,0 +1,59 @@
+#map { 
+    height: 90vh; 
+    position: fixed;
+    right: 0;
+    
+}
+.inlog {
+    top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+} 
+
+.red
+{
+    margin-left: 75px;
+}
+
+.input
+{
+    width: 23%;
+    margin-left: 1%;
+    
+}
+
+.form-control {
+    width: 23%;
+    margin-left: 1%;
+}
+
+textarea {
+    resize: none;
+    width: 23%;
+    margin-left: 1%;
+}
+
+.kaart
+{
+    border: 5px red;        
+}
+
+.center-container {
+    position: absolute;
+    top: 10;
+    left: 0;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h4 {
+    margin: 0;
+}
+
+.navbar-brand {
+    width: 25%;
+}
+

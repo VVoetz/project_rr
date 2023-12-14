@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Start
+{% endblock %}
+
+{% block main %}
+<form action="/add" method="post">
+    <input type="hidden" name="lat" id="latInput" value="">
+    <input type="hidden" name="lng" id="lngInput" value="">
+    <br>
+    <input class="form-control" class="input" type="text" id="name" name="name" placeholder="name"> <br>
+    <textarea id="description" name="description" rows="4" cols="50" placeholder="description"></textarea> <br> 
+    <button class="btn btn-success" type="submit" id="sendDataButton" style="position: fixed; left: 10%; margin-top: 15px;">add</button>
+</form>
+<span style="position: fixed; bottom: 10%; left: 10%">
+    <form>
+        <a href="/"
+          <button type="submit"class="btn btn-danger">
+          Cancel
+          </button>
+          </a>
+    </form>
+ </span>
+{% endblock %}
+
+
+
+
+
+
+{% block marker_add %}
+
+var popup = L.popup();
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("Selected location")
+        .openOn(map);
+
+    document.getElementById("latInput").value = e.latlng.lat;
+    document.getElementById("lngInput").value = e.latlng.lng;
+}
+
+map.on('click', onMapClick);
+{% endblock %}
