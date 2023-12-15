@@ -1,4 +1,4 @@
-import os
+import os, time
 
 from flask import Flask, render_template, session, jsonify, request, flash, redirect
 from flask_session import Session
@@ -167,7 +167,7 @@ def login():
         session["username"] = user.username
 
         # Redirect user to home page
-        return redirect("/start")
+        return redirect("/")
 
 @app.route("/logout")
 def logout():
@@ -177,7 +177,7 @@ def logout():
     session.clear()
 
     # Redirect user to login form
-    return redirect("/start")
+    return redirect("/")
 
 @app.route("/restaurant/<id>")
 def restaurant(id):
@@ -188,7 +188,11 @@ def restaurant(id):
         you = True
     else:
         other = True
-    return render_template("restaurant.html", restaurant = markers, you = you, other = other)
+    user = User.query.filter_by(id=str(session["user_id"])).first()
+    allowdel = False
+    if user.username == markers.placedby:
+        allowdel = True
+    return render_template("restaurant.html", restaurant = markers, you = you, other = other, user = user, allowdel = allowdel)
 
 @app.route("/friends")
 @login_required
@@ -291,10 +295,38 @@ def cancelreq():
 @app.route("/delfriend", methods=["POST"])
 @login_required
 def delfriend():
-
+    friend = request.form.get("user")
+    friendship1 = Friends.query.filter_by(user_id=str(session["user_id"]), friend=friend).first()
+    friendship2 = Friends.query.filter_by(user=friend, friend_id=str(session["user_id"])).first()
+    db.session.delete(friendship1)
+    db.session.delete(friendship2)
+    db.session.commit()
     return redirect("/friends")
+
+@app.route("/delrestaurant", methods=["POST"])
+def delrestaurant():
+    restaurant = request.form.get("delrestaurant")
+    db_entry = Markers.query.filter_by(id=restaurant).first()
+    db.session.delete(db_entry)
+    db.session.commit() 
+    time.sleep(1)
+    return redirect(f"/restaurant/{db_entry.id}")
+
+@app.route("/restaurant/<id>/delrestaurant")
+@login_required
+def delrestaurant2(id):
+    restaurant = id
+    db_entry = Markers.query.filter_by(id=restaurant).first()
+    db.session.delete(db_entry)
+    db.session.commit() 
+    return redirect(f"/restaurant/{db_entry.id}")
+
+@app.route("/reload", methods=["POST", "GET"])
+def reload():   
+    return redirect("/")
     
 
+    
 if __name__ == '__main__':
     
     app.run(debug=True) 
