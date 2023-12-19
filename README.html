@@ -1,0 +1,29 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Untitled Document.md</title><style></style></head><body id="preview">
+<h2 class="code-line" data-line-start="0" data-line-end="1"><a id="Restaurant_Recommender_Wouter_Bentvelzen_0"></a>Restaurant Recommender, Wouter Bentvelzen</h2>
+<p class="has-line-data" data-line-start="1" data-line-end="5">Restaurant Recommender is een web app die het uitkiezen van een restaurant makkelijker maakt. Gebruikers kunnen hun eigen favoriete etablissement met naam en beschrijving op een kaart toevoegen, om makkelijker te onthouden waar men allemaal geweest is. Dit kan natuurlijk ook over een luchroom of koffietent gaan. Daarnaast kunnen gebruikers vrienden toevoegen, om de favoriete plekjes van elkaar te ontdekken en daar wellicht heen te gaan. Deze app is voor iedereen die wel eens moeite heeft met het uitzoeken van restaurants.<br>
+<img src="RR_proposal/readme1.png" alt="Voorbeeld1"><br>
+<img src="RR_proposal/readme2.png" alt="Voorbeeld2"><br>
+<img src="RR_proposal/readme3.png" alt="Voorbeeld3"></p>
+<h2 class="code-line" data-line-start="6" data-line-end="7"><a id="App_demonstratie_6"></a>App demonstratie</h2>
+<p class="has-line-data" data-line-start="7" data-line-end="8"><a href="https://video.uva.nl/media/Programmeerproject+Wouter+Bentvelzen+RestaurantRecommender/0_jqjb73s7">Link naar video</a></p>
+<h3 class="code-line" data-line-start="9" data-line-end="10"><a id="Installatie_in_Ubuntu_9"></a>Installatie (in Ubuntu)</h3>
+<p class="has-line-data" data-line-start="10" data-line-end="11">Download en unzip de code uit Github.</p>
+<p class="has-line-data" data-line-start="12" data-line-end="21">Installeer PostgreSQL:<br>
+Voor Mac gebruikers run: brew install postgresql<br>
+Voor Windows gebruikers zie de instructies van <a href="https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-database#install-postgresql">Microsoft</a><br>
+Database beginnen:<br>
+Voor Mac run: brew services start postgresql<br>
+Voor windows run: sudo service postgresql start<br>
+Voor zowel Mac als Windows run: CREATE DATABASE restaurantrecommender;<br>
+En daarna: \c restaurantrecommender<br>
+Vervolgens:</p>
+<ul>
+<li class="has-line-data" data-line-start="21" data-line-end="22">Binnen de map /Eindversie run: python3 -m pip install -r requirements.txt</li>
+<li class="has-line-data" data-line-start="22" data-line-end="23">Als laatste voorbereiding run: export DATABASE_URL=“postgresql://localhost/restaurantrecommender”</li>
+<li class="has-line-data" data-line-start="23" data-line-end="25">Om de site te starten run de volgende command binnen /Eindversie directory: flask run --debug</li>
+</ul>
+<h2 class="code-line" data-line-start="25" data-line-end="26"><a id="Bronvermelding_25"></a>Bronvermelding</h2>
+<p class="has-line-data" data-line-start="26" data-line-end="29">De code voor de kaart komt van Leafletjs en de kaart zelf van OpenStreetMap 2023<br>
+Voor bijna alle functionaliteiten op de kaart is ook gebruik gemaakt van code uit de LeafletJS library.<br>
+De knop om de huidige locatie te vinden is Ruben Holthuijsen © 2020</p>
+</body></html>

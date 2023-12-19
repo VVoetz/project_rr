@@ -41,7 +41,11 @@ def home():
         for marker in f_markers:
             friendmarkers.append(marker)
         
-    return render_template("home.html", markers = markers, rendermap = True, fmarkers = friendmarkers, friends = friendships)
+    return render_template("home.html", 
+                            markers = markers,
+                            rendermap = True,
+                            fmarkers = friendmarkers,
+                            friends = friendships)
     
     
 @app.route("/start", methods=["GET", "POST"])
@@ -57,10 +61,13 @@ def index():
         f_markers = Markers.query.filter_by(placedby=friend.friend).all()
         for marker in f_markers:
             friendmarkers.append(marker)
-        
-    
-    
-    return render_template("start.html", markers = markers, rendermap = True, fmarkers = friendmarkers, friends = friendships, add = True)
+
+    return render_template("start.html",
+                           markers = markers,
+                           rendermap = True,
+                           fmarkers = friendmarkers,
+                           friends = friendships,
+                           add = True)
 
 @app.route("/add", methods=["GET", "POST"])
 @login_required
@@ -73,27 +80,27 @@ def add():
     if not request.form.get("name"):
         flash("no name given")
         return redirect("/start")
-    
+
     if not request.form.get("description"):
         flash("no description given")
         return redirect("/start")
-        
+   
     markerlat = request.form.get("lat")
     markerlng = request.form.get("lng")   
     description = request.form.get("description")
     user = User.query.filter_by(id=str(session["user_id"])).first()
     username = str(user.username)
-    
+
     marker = Markers()
     marker.horizontal = markerlat
     marker.vertical = markerlng
     marker.placedby = username
     marker.name = request.form.get("name")
     marker.description = description
-    
+
     db.session.add(marker)
     db.session.commit()
-    
+
     return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -192,7 +199,12 @@ def restaurant(id):
     allowdel = False
     if user.username == markers.placedby:
         allowdel = True
-    return render_template("restaurant.html", restaurant = markers, you = you, other = other, user = user, allowdel = allowdel)
+    return render_template("restaurant.html",
+                            restaurant = markers,
+                            you = you,
+                            other = other,
+                            user = user,
+                            allowdel = allowdel)
 
 @app.route("/friends")
 @login_required
@@ -201,7 +213,10 @@ def friends():
     friends = Friends.query.filter_by(user_id=session["user_id"]).all()
     inc_requests = Requests.query.filter_by(friend_id=session["user_id"]).all()
     out_requests = Requests.query.filter_by(user_id=session["user_id"]).all()
-    return render_template("friends.html", friends = friends, inc_requests = inc_requests, out_requests = out_requests)
+    return render_template("friends.html",
+                            friends = friends,
+                            inc_requests = inc_requests,
+                            out_requests = out_requests)
 
 @app.route("/addfriend", methods=["POST"])
 @login_required
@@ -212,8 +227,8 @@ def add_friend():
         return redirect("/friends")
     
     friend = request.form.get("friend_id")
-    user = User.query.filter_by(id=str(session["user_id"])).first()
-    friend_db = User.query.filter_by(username=str(friend)).first()
+    user = User.query.filter_by(id=(session["user_id"])).first()
+    friend_db = User.query.filter_by(username=(friend)).first()
     
     if friend_db == None:
         flash("username not in database")
@@ -312,21 +327,10 @@ def delrestaurant():
     time.sleep(1)
     return redirect(f"/restaurant/{db_entry.id}")
 
-@app.route("/restaurant/<id>/delrestaurant")
-@login_required
-def delrestaurant2(id):
-    restaurant = id
-    db_entry = Markers.query.filter_by(id=restaurant).first()
-    db.session.delete(db_entry)
-    db.session.commit() 
-    return redirect(f"/restaurant/{db_entry.id}")
-
 @app.route("/reload", methods=["POST", "GET"])
 def reload():   
     return redirect("/")
     
-
-    
-if __name__ == '__main__':
+if __name__ == '__main__':  
     
     app.run(debug=True) 

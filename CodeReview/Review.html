@@ -1,0 +1,29 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Untitled Document.md</title><style></style></head><body id="preview">
+<h2 class="code-line" data-line-start="0" data-line-end="1"><a id="Project_Code_Review_Wouter_0"></a>Project Code Review Wouter</h2>
+<p class="has-line-data" data-line-start="1" data-line-end="2">Samengewerkt met: Ron Lakeman en Sunshine Landvreugd.</p>
+<p class="has-line-data" data-line-start="3" data-line-end="4">Uit de review zijn niet per se grote problemen of verbeterpunten direct naar boven gekomen. Natuurlijk zijn er een aantal verbeteringen die Ik kon toepassen:</p>
+<h3 class="code-line" data-line-start="5" data-line-end="6"><a id="Netheid_HTML_code_5"></a>Netheid HTML code</h3>
+<p class="has-line-data" data-line-start="7" data-line-end="10">De netheid van mijn HTML code was niet erg on-point. Het is voornamelijk een flink onduidelijke bende als het gaat om het aantal tabs aan het begin van elke regel. Op veel plekken onjuiste indentation. Het is ook wel voorgekomen dat er op sommige plekken overbodige elements zijn achtergebleven die tijdens het testen misschien ooit nog wel nodig waren.<br>
+<img src="voorbeeld_1.png" alt="Voorbeeld1"><br>
+Tijdens de codereview had Ik bijvoorbeeld met dit stuk HTML echt moeite met de indentatie en locatie van &lt;&gt; elementen.</p>
+<h3 class="code-line" data-line-start="11" data-line-end="12"><a id="Methods_bij_functies_verbeteren_11"></a>Methods bij functies verbeteren</h3>
+<p class="has-line-data" data-line-start="12" data-line-end="17">Mijn code is op sommige plekken ietwat inconsistent als het gaat om de methods die worden geaccepteerd binnen <a href="http://app.py">app.py</a> per route. Een reden waarom Ik daar niet echt mee bezig ben geweest is omdat Ik bijna nergens via dezeldfe app route 2 verschillende acties doe. (Het laden van /login en het daadwerkelijke inloggen gaat bijvoorbeeld beiden via de route /login terwijl op andere pagina’s verschillende knoppen hun eigen routes hebben). Alsnog zou het later problemen kunnen opleveren als onjuiste metehods worden toegelaten.<br>
+<img src="voorbeeld_2.png" alt="Voorbeeld2"><br>
+Bij voorbeeld 2 had Ik uit gemakzucht maar gewoon GET en POST toegelaten terwijl alleen POST zou moeten mogen.<br>
+<img src="voorbeeld_3.png" alt="Voorbeeld3"><br>
+Bij voorbeeld 3 heb Ik uberhaupt geen methods gespecificeerd. Daar zou alleen GET moeten mogen.</p>
+<h3 class="code-line" data-line-start="18" data-line-end="19"><a id="Onnodig_omzetten_naar_string_in_sql_queries_18"></a>Onnodig omzetten naar string in sql queries</h3>
+<p class="has-line-data" data-line-start="19" data-line-end="22">Wat een van mijn review-partners opviel was dat Ik op verschillende plekken, maar dan weer niet overal, gegevens die in een SQL-query worden gestopt onnodig naar een string werden veranderd.<br>
+<img src="voorbeeld_4.png" alt="Voorbeeld4"><br>
+In beide van deze gevallen was het totaal niet nodig. De code werkte ook gewoon zo nder het omzetten naar str. Zeker bij de id=str(session[“user_id”]) was het overbodig, want “ID” in mijn database is niet eens een string maar een integer.</p>
+<h3 class="code-line" data-line-start="23" data-line-end="24"><a id="Dubbele_entries_in_database_23"></a>Dubbele entries in database</h3>
+<p class="has-line-data" data-line-start="24" data-line-end="26">Om het voor mij wat makkelijker te maken om te zoeken naar alle vriendschappen van een gebruiker, had Ik besloten om elke vriendschap tweemaal in mijn database te zetten. Eenmaal was gebruiker 1 de “user” en gebruiker 2 de “friend”, en de andere keer was het andersom. Anders moet je elke keer zoeken naar friendships waarbij ofwel de “user”, ofwel de “friend” de huidige gebruiker is. Dit zou wel minder opslag gebruiken.<br>
+<img src="voorbeeld_5.png" alt="Voorbeeld5"></p>
+<h3 class="code-line" data-line-start="27" data-line-end="28"><a id="Een_hoop_kleine_verbeteringen_in_de_code_27"></a>Een hoop kleine verbeteringen in de code</h3>
+<p class="has-line-data" data-line-start="28" data-line-end="34">Ten eerste gaat de route “/start” naar de pagina waar men restaurants kan toevoegen. ‘start’ is dan niet echt een logische naam voor die route.<br>
+Daarnaast had Ik bijna nergens comments geplaatst. Mijn review-partners hadden wel redelijk idee wat de code deed maar natuurlijk niet genoeg. Er moet zeker meer bij.<br>
+Daarnaast had Ik overbodige bestanden in mijn folder staan waarvan Ik niet zeker wist of Ik die nodig had voor het runnen van de kaart op mijn website. Deze zijn uiteindelijk niet nodig geweest maar stonden er nog wel in. Dit maakt het allemaal een stuk onoverzichtelijker.<br>
+Ook had Ik tijdens het testen 2 verschillende implementaties van 1 functie toegevoegd.<br>
+<img src="voorbeeld_6.png" alt="Voorbeeld6"><br>
+Voor anderen is het erg onduidelijk wat het nut is van twee verschillende functies, de functie die niet meer in gebruik is heb Ik dus ook verwijderd.</p>
+</body></html>
