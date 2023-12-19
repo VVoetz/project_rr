@@ -31,9 +31,13 @@ def begin():
 @login_required
 def home():
 
+    # Get information from SQL database to present on map 
+    
     user = User.query.filter_by(id=str(session["user_id"])).first()
     username = str(user.username)
     markers = Markers.query.filter_by(placedby=username).all()
+    
+    # Makes a list of markers from all friends of current user
     friendmarkers = list()
     friendships = Friends.query.filter_by(user_id=session["user_id"]).all()
     for friend in friendships:
@@ -51,10 +55,15 @@ def home():
 @app.route("/start", methods=["GET", "POST"])
 @login_required
 def index():
-
+    
+    # Get information from SQL database to present on map
+    
     user = User.query.filter_by(id=str(session["user_id"])).first()
     username = str(user.username)
     markers = Markers.query.filter_by(placedby=username).all()
+    
+    # Makes a list of markers from all friends of current user
+    
     friendmarkers = list()
     friendships = Friends.query.filter_by(user_id=session["user_id"]).all()
     for friend in friendships:
@@ -108,10 +117,13 @@ def register():
     if request.method == "GET":
         return render_template("register.html")
     else:
+        
+        # Retrieve information form webpage
         username = request.form.get("username")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
         
+        # Checking for errors in registration
         if not username:
             flash("no username given")
             return redirect("/register")
@@ -125,12 +137,13 @@ def register():
             flash("passwords don't match")
             return render_template("register.html")
             
-        hashed_password = generate_password_hash(password)
         usercheck = User.query.filter_by(username=str(username)).first()
-        
         if usercheck != None:
             flash(f"{usercheck.username} already in database")
             return render_template("register.html")
+        
+        # Adding user to database
+        hashed_password = generate_password_hash(password)
         user = User(username=str(username), password=str(hashed_password))
         db.session.add(user)
         db.session.commit()
@@ -186,29 +199,33 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-@app.route("/restaurant/<id>")
+@app.route("/restaurant/<int:id>")
 def restaurant(id):
+    # Check which restaurant needs to be displayed
     markers = Markers.query.filter_by(id=id).first()
-    you = None
-    other = None
+    
+    # Checks if current user has placed said restaurant
+    you = False
+    other = False
     if markers.placedby == session["username"]:
         you = True
     else:
         other = True
+    
+    # Retrieving information of user who placed restaurant
     user = User.query.filter_by(id=str(session["user_id"])).first()
-    allowdel = False
-    if user.username == markers.placedby:
-        allowdel = True
+    
     return render_template("restaurant.html",
                             restaurant = markers,
                             you = you,
                             other = other,
-                            user = user,
-                            allowdel = allowdel)
+                            user = user)
 
 @app.route("/friends")
 @login_required
 def friends():
+    
+    # Retrieving information about friendships and requests to present to user
     
     friends = Friends.query.filter_by(user_id=session["user_id"]).all()
     inc_requests = Requests.query.filter_by(friend_id=session["user_id"]).all()
@@ -221,6 +238,8 @@ def friends():
 @app.route("/addfriend", methods=["POST"])
 @login_required
 def add_friend():
+    
+    # Running tests to make sure it is a valid request
     
     if not request.form.get("friend_id"):
         flash("no username given")
@@ -253,6 +272,8 @@ def add_friend():
         flash("You are already friends with this user")
         return redirect("friends")
     
+    # Adding request to database
+    
     db_entry = Requests()
     db_entry.user = user.username
     db_entry.user_id = user.id
@@ -268,13 +289,17 @@ def add_friend():
 @login_required
 def incfriend():
     
+    # Retrieving information from webpage and database
+    
     friend = request.form.get("friendname")
     choice = request.form.get("choice")
     
     friend_db = User.query.filter_by(username=str(friend)).first()
     user_db = User.query.filter_by(id=str(session["user_id"])).first()
-    
     req = Requests.query.filter_by(friend_id=session["user_id"], user=str(friend)).first()
+    
+    # Adding friendship to database when user accepted request
+    
     if choice == "accept":
        friendship = Friends()
        friendship.user = req.user
@@ -291,7 +316,8 @@ def incfriend():
        db.session.add(friendship)
        db.session.add(revFriendship)
        db.session.commit()
-          
+    
+    # Deleting request from database regardless of choice accept/deny
     db.session.delete(req)
     db.session.commit()
         
@@ -301,7 +327,9 @@ def incfriend():
 @login_required
 def cancelreq():
     
-    friend = request.form.get("cancel") 
+    # Retrieving information from webpage and database in order to delete request from database
+    
+    friend = request.form.get("cancel")
     req = Requests.query.filter_by(user_id=str(session["user_id"]), friend=friend).first()
     db.session.delete(req)
     db.session.commit()
@@ -310,6 +338,9 @@ def cancelreq():
 @app.route("/delfriend", methods=["POST"])
 @login_required
 def delfriend():
+
+    # Retrieving information from webpage and database in order to delete friendship from database
+    
     friend = request.form.get("user")
     friendship1 = Friends.query.filter_by(user_id=str(session["user_id"]), friend=friend).first()
     friendship2 = Friends.query.filter_by(user=friend, friend_id=str(session["user_id"])).first()
@@ -320,14 +351,18 @@ def delfriend():
 
 @app.route("/delrestaurant", methods=["POST"])
 def delrestaurant():
+
+    # Retrieving information from webpage and database in order to delete marker from database
     restaurant = request.form.get("delrestaurant")
     db_entry = Markers.query.filter_by(id=restaurant).first()
     db.session.delete(db_entry)
     db.session.commit() 
+    
+    # Waiting to make sure the browser does not reload current iframe before the window is refreshed.
     time.sleep(1)
     return redirect(f"/restaurant/{db_entry.id}")
 
-@app.route("/reload", methods=["POST", "GET"])
+@app.route("/reload", methods=["GET"])
 def reload():   
     return redirect("/")
     

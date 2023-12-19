@@ -1,63 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+  <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-         <!-- http://getbootstrap.com/docs/5.1/ -->
-        <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
-        <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"></script>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-             integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-             crossorigin=""/>
-        <h4 style="text-align: center;">
-            {{restaurant.name}}
-        </h4>
+      <!-- http://getbootstrap.com/docs/5.1/ -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <h4 style="text-align: center;">
+        {{restaurant.name}}
+    </h4>
     </head>
     <body>
-        {{restaurant.description}} <br>
-        {% if you %}
-        Placed by: You
-        {% endif %}
-        
-        {% if other %}
-        <a style="position: fixed; margin-top: 5px">
+      {{restaurant.description}} <br>
+      {% if you %}
+      Placed by: You
+      {% endif %}
+      
+      {% if other %}
+      <a style="position: fixed; margin-top: 5px">
         Placed by: {{restaurant.placedby}} 
-        </a>
-        {% endif %}
-        
-        {% if allowdel %}
-        </body>
-        <form onclick="myFunction()">
-        <button type="submit" class="btn btn-danger btn-sm" style="position: fixed; top: 0%; right: 0%;" title="Remove Restaurant">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-              <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-        </button>
-        </form>
-        <form action="/delrestaurant" method="post" id="form">
-        <input type="hidden" name="delrestaurant" id="delrestaurant" value="{{restaurant.id}}">
-        <button type="submit" id="inputbutton" style="display: none"></button>
-        </form>
-        
-        
-      </svg>
-        {% endif %}
-<html>
+      </a>
+      {% endif %}
+    </body>
+    {% if you %}
+    <form onclick="myFunction()">
+      <button type="submit" class="btn btn-danger btn-sm" style="position: fixed; top: 0%; right: 0%;" title="Remove Restaurant">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+          <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+        </svg>
+      </button>
+    </form>
+    <form action="/delrestaurant" method="post" id="form">
+      <input type="hidden" name="delrestaurant" id="delrestaurant" value="{{restaurant.id}}">
+      <button type="submit" id="inputbutton" style="display: none"></button>
+    </form>
+    {% endif %}
+</html>
 <script>
 
-
-function myFunction() {
-  let text = "Are you sure you want to delete the restaurant? Press OK to delete";
-  if (confirm(text) == true) {
-    // User pressed OK, redirect to a certain webpage
-    
-    window.parent.location.href = "/reload";
-    event.preventDefault();
-    document.getElementById("form").submit();
-  } else {
-    text = "Canceled";
-    
-    // Continue with other actions if needed
+  function myFunction() {
+    let text = "Are you sure you want to delete the restaurant? Press OK to delete";
+    if (confirm(text) == true) {
+      // User pressed OK, redirect to a certain webpage
+      
+      window.parent.location.href = "/reload";
+      event.preventDefault();
+      document.getElementById("form").submit();
+    } else {
+      text = "Canceled";
+      
+      // Continue with other actions if needed
+    }
   }
-}
 
 </script>
